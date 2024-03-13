@@ -55,17 +55,17 @@ exports.register = async (req, res) => {
 // Login function with JWT token generation
 exports.login = async (req, res) => {
   try {
-    const { username, password } = req.body;
+    const { email, password } = req.body;
 
-    const query = 'SELECT * FROM users WHERE username = ?';
-    db.get(query, [username], async (err, user) => {
+    const query = 'SELECT * FROM users WHERE email = ?';
+    db.get(query, [email], async (err, user) => {
       if (err) {
         console.error('Error during login:', err.message);
         return res.status(500).json({ error: 'Internal Server Error' });
       }
 
       if (!user) {
-        return res.status(401).json({ error: 'Invalid username or password' });
+        return res.status(401).json({ error: 'Invalid email or password' });
       }
 
       const isPasswordValid = await bcrypt.compare(password, user.password);
@@ -76,7 +76,7 @@ exports.login = async (req, res) => {
 
         res.status(200).json({ message: 'Login successful', token });
       } else {
-        res.status(401).json({ error: 'Invalid username or password' });
+        res.status(401).json({ error: 'Invalid email or password' });
       }
     });
   } catch (error) {
