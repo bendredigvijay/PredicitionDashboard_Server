@@ -11,4 +11,4 @@ router.post('/register', authController.register);
 // Fetch Fuel and Weather Data route
 router.get('/fetchFuelAndWeatherData', authController.fetchFuelAndWeatherData);
 
-module.exports = router;
+module.exports = router;  
