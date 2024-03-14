@@ -95,9 +95,11 @@ exports.fetchFuelAndWeatherData = (req, res) => {
         '2024-01-23': 'bad',
       },
     };
+    // Include weatherData along with fuelData and actualFuelData
     res.json({ fuelData, actualFuelData, weatherData });
   } catch (error) {
     console.error('Error fetching fuel and weather data:', error.message);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 };
+
